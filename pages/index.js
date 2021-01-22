@@ -3,10 +3,10 @@ import Fetch from 'isomorphic-unfetch'
 import { useState } from 'react'
 
 const Index =  (props) => {
-  // console.log('Index Propsss', props)
+  console.log('propsJOBSS', props.jobs)
   const [filteredData, setFilteredData] = useState(null);
   return (
-    <Layout jobs={filteredData == null ? props.jobs : filteredData}
+    <Layout jobs={filteredData == null ? props.jobs.jobs : filteredData.jobs ? filteredData.jobs : filteredData}
       filters={props.filters}
       setFilteredData={setFilteredData}
     >

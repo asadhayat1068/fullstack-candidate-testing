@@ -1,7 +1,40 @@
 import JobLocation from './JobLocation'
+import { useState } from 'react'
+const _ = require('lodash')
 
 const MainContainer = (props) => {
     console.log('Main Containerrrrrrr Props', props)
+    let sortingOptions = [
+        {key: 'location', sort: false, field: 'name'},
+        {key: 'role', sort: false, field: 'job_title'},
+        {key: 'department', sort: false, field: (item) => {
+            let departments = []
+            item.items.map(it => {
+                if (it.departments) {
+                    departments = [...departments, ...it.departments]
+                }
+            })
+            return departments
+        }},
+        {key: 'education', sort: false, field: (item) => {
+            let education = []
+            item.items.map(it => {
+                if (it.required_credentials) {
+                    education = education.concat([it.required_credentials])
+                }
+            })
+            return education
+        }},
+        {key: 'experience', sort: false, field: (item) => {
+            let experience = []
+            item.items.map(it => {
+                if (it.experience) {
+                    experience = experience.concat([it.experience])
+                }
+            })
+            return experience
+        }}
+    ]
     
     const getTotalJobs = (jobs) => {
         let total = 0
@@ -10,25 +43,55 @@ const MainContainer = (props) => {
         });
         return total
     }
+    
+
+    const updateSorting = (key) => {
+        const sortFields = [];
+        const sortOrder = [];
+        sortingOptions.map((sort, i) => {
+            if (sort.key == key) {
+                if (!sort.sort) { 
+                    sort.sort = 'asc'
+                } else if (sort.sort == 'asc') {
+                    sort.sort = 'desc'
+                } else {
+                    sort.sort = false
+                }
+                sortingOptions[i] = sort
+            }
+
+            if(sort.sort !== false) {
+                sortFields.push(sort.field)
+                sortOrder.push(sort.sort)
+            }
+        })
+
+        let sorted = _.orderBy(props.locations, sortFields, sortOrder)
+        props.setFilteredData(sorted)
+    }
+
+
     return (
         <div className="card pl-2">
-            
 
 
-            <div class="flex justify-between mb-8">
-                <div class="text-sm">
+            <div className="flex justify-between mb-8">
+                <div className="text-sm">
                     <span>
-                        <span class="font-semibold text-sm pr-2">{ getTotalJobs(props.locations)}</span>
+                        <span className="font-semibold text-sm pr-2">{ getTotalJobs(props.locations)}</span>
                         job postings
                     </span>
                 </div>
-                <div class="text-sm hidden lg:inline-block">
-                    <span class="text-gray-400">Sort by</span>
-                    <span class="pl-2 cursor-pointer">Location</span>
-                    <span class="pl-2 cursor-pointer">Role</span>
-                    <span class="pl-2 cursor-pointer">Department</span>
-                    <span class="pl-2 cursor-pointer">Education</span>
-                    <span class="pl-2 cursor-pointer">Experience</span>
+                <div className="text-sm hidden lg:inline-block">
+                    <span className="text-gray-400">Sort by</span>
+                    {sortingOptions.map(sortingOption => (
+                        <a className="pl-2 cursor-pointer"
+                            key={sortingOption.key}
+                            onClick={() => { updateSorting(sortingOption.key) }}
+                        >
+                            { sortingOption.key.charAt(0).toUpperCase() + sortingOption.key.slice(1) } |
+                        </a>
+                    ))}
                 </div>
             </div>
 

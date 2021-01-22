@@ -6,7 +6,7 @@ import { useState } from 'react'
 import Footer from '../components/footer/footer'
 
 const Layout = (props) => { 
-    console.log('Layout Props: ', props)
+    // console.log('Layout Props: ', props)
 
     const fetcher = (url) =>
     fetch(url).then((res) => {
@@ -14,29 +14,27 @@ const Layout = (props) => {
     });
 
     const handleSearch = async (query) => {
-        console.log('Calling Handle Search')
         if(query === "")
         {
             props.setFilteredData(null)
             return
         }
-
+        query = query.toLowerCase()
         fetcher("/api/jobs?search=").then((data) => {
             // console.log(`Fetcher Data + ${query}`, data)
             data.jobs = data.jobs.filter( job => {
-            let include = job.job_title.includes(query) || job.name.includes(query);
+            let include = job.job_title.toLowerCase().includes(query) || job.name.includes(query);
                 if(!include) {
                     for (let item of job.items) {
-                        include = include || item.department.join('').includes(query)
-                        include = include || item.required_credentials.join('').includes(query)
-                        include = include || item.required_skills.join('').includes(query)
-                        include = include || item.type.includes(query)
-                        include = include || item.work_schedule.includes(query)
-                        include = include || item.name.includes(query)
-                        include = include || item.job_type.includes(query)
-                        include = include || item.job_title.includes(query)
-                        include = include || item.experience.includes(query)
-                        
+                        include = include || item.department.join('').toLowerCase().includes(query)
+                        include = include || item.required_credentials.join('').toLowerCase().includes(query)
+                        include = include || item.required_skills.join('').toLowerCase().includes(query)
+                        include = include || item.type.toLowerCase().includes(query)
+                        include = include || item.work_schedule.toLowerCase().includes(query)
+                        include = include || item.name.toLowerCase().includes(query)
+                        include = include || item.job_type.toLowerCase().includes(query)
+                        include = include || item.job_title.toLowerCase().includes(query)
+                        include = include || item.experience.toLowerCase().includes(query)
                     }
                 }
                 return include
@@ -49,7 +47,11 @@ const Layout = (props) => {
             <Header/>
             <div className="container mx-auto">
                 <SearchBar handleSearch={handleSearch}/>
-                <Body children={props.children} jobs={props.jobs.jobs} filters={props.filters}/>
+                <Body children={props.children}
+                    jobs={props.jobs}
+                    filters={props.filters}
+                    setFilteredData={props.setFilteredData}
+                />
             </div>
             <Footer/>
         </div>

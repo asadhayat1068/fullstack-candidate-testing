@@ -19,7 +19,7 @@ const Footer = () => (
         <h1 className="mt-8 text-3xl font-semibold mb-4">Privacy</h1>
         <p className="mb-2">Terms of use</p>
         <p className="mb-2">Privacy policy</p>
-        <p className="mb-2">Cookie policy</p>
+        <p className="mb-2">Cookie policy</p>   
       </div>
     </div>
   )

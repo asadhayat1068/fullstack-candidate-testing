@@ -9,7 +9,7 @@ const Body = (props) => {
             <LeftMenu filters={props.filters}/>
         </div>
         <div className="col-span-4 md:col-span-3">
-            <MainContainer children={props.children} locations={props.jobs}/>
+            <MainContainer children={props.children} locations={props.jobs} setFilteredData={props.setFilteredData}/>
         </div>
     </div>
   )}

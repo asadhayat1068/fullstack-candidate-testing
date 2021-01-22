@@ -3,7 +3,7 @@ import { useState } from 'react';
 const JobItem = (props) => {
     const [showDetails, toggleJobDetails] = useState(false)
     const toggleShowDetails = () => { toggleJobDetails(showDetails => !showDetails) }
-    console.log('Job ITEMMMMM Props', props)
+    // console.log('Job ITEMMMMM Props', props)
 
     return (
         <div>

@@ -1,6 +1,6 @@
 const JobDetails = ({job}) => {
     
-    console.log('Job Details Props', job)
+    // console.log('Job Details Props', job)
 
     return (
         <div className="flex justify-between">
