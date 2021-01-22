@@ -1,8 +1,28 @@
 import Layout from '../Layout/Layout'
-const Index = () => (
+import Fetch from 'isomorphic-unfetch'
+import { useState } from 'react'
 
-  <Layout>
-    <h1>Hello</h1>
-  </Layout>
-)
+const Index =  (props) => {
+  // console.log('Index Propsss', props)
+  const [filteredData, setFilteredData] = useState(null);
+  return (
+    <Layout jobs={filteredData == null ? props.jobs : filteredData}
+      filters={props.filters}
+      setFilteredData={setFilteredData}
+    >
+      <h1>Hello</h1>
+    </Layout>
+  )
+}
+
+Index.getInitialProps = async (ctx) => {
+  const res = await Fetch('http://localhost:3000/api/filters')
+  const filters = await res.json();
+
+  const JobsRes = await Fetch('http://localhost:3000/api/jobs')
+  const jobsData = await JobsRes.json();
+  
+  return { filters: filters, jobs: jobsData }
+}
+
 export default Index
