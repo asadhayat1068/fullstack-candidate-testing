@@ -1,7 +1,12 @@
 const Header = () => (
     <div className=" bg-white p-3 px-6 grid grid-cols-4">
-        <div className="col-span-2 md:col-span-1">
-            <h1 className="text-blue-400 text-2xl uppercase font-bold">Health Explore</h1>
+        <div className="col-span-2 md:col-span-1 flex">
+            <div className="px-4 md:hidden">
+                <svg className="text-gray-500 w-6 mt-3 " xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd" />
+                </svg>
+            </div>
+            <h1 className="text-blue-400 text-xl uppercase font-bold mt-2">Health Explore</h1>
         </div>
         {/* MENUS */}
         <div className="col-span-0 hidden md:block md:col-span-2">

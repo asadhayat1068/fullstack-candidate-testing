@@ -35,6 +35,8 @@ const MainContainer = (props) => {
             return experience
         }}
     ]
+
+    const [sortOptions, setSortOptions] = useState(sortingOptions)
     
     const getTotalJobs = (jobs) => {
         let total = 0
@@ -48,24 +50,27 @@ const MainContainer = (props) => {
     const updateSorting = (key) => {
         const sortFields = [];
         const sortOrder = [];
-        sortingOptions.map((sort, i) => {
+        sortOptions.map((sort, i) => {
             if (sort.key == key) {
-                if (!sort.sort) { 
-                    sort.sort = 'asc'
+                console.log('Now: ', sort.sort, key, i)
+                if (sort.sort == false) { 
+                    sort.sort = 'asc'          
                 } else if (sort.sort == 'asc') {
                     sort.sort = 'desc'
                 } else {
                     sort.sort = false
                 }
-                sortingOptions[i] = sort
             }
+            sortingOptions[i] = sort
 
             if(sort.sort !== false) {
                 sortFields.push(sort.field)
                 sortOrder.push(sort.sort)
             }
-        })
+            setSortOptions(sortingOptions)
 
+        })
+        console.log('Sorting Options: ', sortingOptions)
         let sorted = _.orderBy(props.locations, sortFields, sortOrder)
         props.setFilteredData(sorted)
     }
@@ -84,12 +89,12 @@ const MainContainer = (props) => {
                 </div>
                 <div className="text-sm hidden lg:inline-block">
                     <span className="text-gray-400">Sort by</span>
-                    {sortingOptions.map(sortingOption => (
+                    {sortOptions.map(sortOptions => (
                         <a className="pl-2 cursor-pointer"
-                            key={sortingOption.key}
-                            onClick={() => { updateSorting(sortingOption.key) }}
+                            key={sortOptions.key}
+                            onClick={() => { updateSorting(sortOptions.key) }}
                         >
-                            { sortingOption.key.charAt(0).toUpperCase() + sortingOption.key.slice(1) } |
+                            { sortOptions.key.charAt(0).toUpperCase() + sortOptions.key.slice(1) } |
                         </a>
                     ))}
                 </div>
