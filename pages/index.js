@@ -1,6 +1,8 @@
+import Layout from '../Layout/Layout'
 const Index = () => (
-  <p>
-Hello, Clipboard health!
-  </p>
+
+  <Layout>
+    <h1>Hello</h1>
+  </Layout>
 )
 export default Index
