@@ -16,10 +16,10 @@ const Index =  (props) => {
 }
 
 Index.getInitialProps = async (ctx) => {
-  const res = await Fetch('http://localhost:3000/api/filters')
+  const res = await Fetch('/api/filters')
   const filters = await res.json();
 
-  const JobsRes = await Fetch('http://localhost:3000/api/jobs')
+  const JobsRes = await Fetch('/api/jobs')
   const jobsData = await JobsRes.json();
   
   return { filters: filters, jobs: jobsData }
