@@ -39,6 +39,7 @@ const MainContainer = (props) => {
     const [sortOptions, setSortOptions] = useState(sortingOptions)
     
     const getTotalJobs = (jobs) => {
+        // console.log('JJJOBS: ', jobs)
         let total = 0
         jobs.forEach(job => {
             total += job.total_jobs_in_hospital

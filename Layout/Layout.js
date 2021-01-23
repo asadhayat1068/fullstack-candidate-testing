@@ -2,16 +2,15 @@ import { GetServerSideProps } from 'next'
 import Header from '../components/header/header'
 import Body from '../components/body/body'
 import SearchBar from '../components/body/searchBar'
-import { useState } from 'react'
 import Footer from '../components/footer/footer'
 
 const Layout = (props) => { 
-    // console.log('Layout Props: ', props)
-
+    console.log('Layout Props: ', props)
     const fetcher = (url) =>
-    fetch(url).then((res) => {
+        fetch(url).then((res) => {
       return res.json();
     });
+
 
     const handleSearch = async (query) => {
         if(query === "")
@@ -20,7 +19,7 @@ const Layout = (props) => {
             return
         }
         query = query.toLowerCase()
-        fetcher("/api/jobs?search=").then((data) => {
+        fetcher("/api/jobs").then((data) => {
             // console.log(`Fetcher Data + ${query}`, data)
             data.jobs = data.jobs.filter( job => {
             let include = job.job_title.toLowerCase().includes(query) || job.name.includes(query);
@@ -39,9 +38,11 @@ const Layout = (props) => {
                 }
                 return include
             })
+            console.log('Setting Filtered Data', data)
             props.setFilteredData(data)
         })
     }
+
     return (
         <div className="bg-gray-100">
             <Header/>
