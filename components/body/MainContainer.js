@@ -3,11 +3,12 @@ import { useState } from 'react'
 const _ = require('lodash')
 
 const MainContainer = (props) => {
-    console.log('Main Containerrrrrrr Props', props)
+    // console.log('Main Containerrrrrrr Props', props)
     let sortingOptions = [
         {key: 'location', sort: false, field: 'name'},
         {key: 'role', sort: false, field: 'job_title'},
         {key: 'department', sort: false, field: (item) => {
+            console.log('Department: ', item)
             let departments = []
             item.items.map(it => {
                 if (it.departments) {
@@ -17,6 +18,7 @@ const MainContainer = (props) => {
             return departments
         }},
         {key: 'education', sort: false, field: (item) => {
+            console.log('Education: ', item)
             let education = []
             item.items.map(it => {
                 if (it.required_credentials) {
@@ -26,6 +28,7 @@ const MainContainer = (props) => {
             return education
         }},
         {key: 'experience', sort: false, field: (item) => {
+            console.log('Experience: ', item)
             let experience = []
             item.items.map(it => {
                 if (it.experience) {
@@ -73,7 +76,8 @@ const MainContainer = (props) => {
         })
         console.log('Sorting Options: ', sortingOptions)
         let sorted = _.orderBy(props.locations, sortFields, sortOrder)
-        props.setFilteredData(sorted)
+        console.log('Sorted Data: ', sorted)
+        props.setFilteredData({jobs: sorted})
     }
 
 
