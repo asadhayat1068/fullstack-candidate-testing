@@ -4,8 +4,6 @@ import JobItem from './JobItem'
 const JobLocation = (props) => {
     const [showJobs, toggleShowJobs] = useState(false)
     const showJobsHandler = () => { toggleShowJobs(showJobs => !showJobs) }
-
-    // console.log('Job Location Props', props)
     return (
         <div>
             <div className="flex my-2 cursor-pointer" onClick={showJobsHandler}>

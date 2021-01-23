@@ -1,7 +1,4 @@
 const JobDetails = ({job}) => {
-    
-    // console.log('Job Details Props', job)
-
     return (
         <div className="flex justify-between">
             <div className="mr-5 flow-root">

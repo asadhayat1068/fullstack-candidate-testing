@@ -27,15 +27,12 @@ const Index =  () => {
     fetcher("/api/jobs").then((data) => {
       return setJobsData(data)
     }).then(status => {
-      console.log('JOBS DATA: ', filteredData)
       jobsLoaded = true
     })
 
     fetcher("/api/filters").then((data) => {
-      // console.log('Filters DATA: ', data)
       return setFilters(data)
     }).then(status => {
-      console.log('Filters DATA: ', filters)
       filtersLoaded = true
     })
 

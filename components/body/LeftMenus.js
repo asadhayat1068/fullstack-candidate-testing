@@ -1,6 +1,5 @@
 import LeftMenuSection from './LeftMenuSection' 
 const LeftMenu = (props) => {
-    // console.log('Left Menu Props: ', props)
     return (
     <div className="">
         {Object.keys(props.filters).map((key) => (

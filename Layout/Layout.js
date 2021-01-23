@@ -5,7 +5,6 @@ import SearchBar from '../components/body/searchBar'
 import Footer from '../components/footer/footer'
 
 const Layout = (props) => { 
-    console.log('Layout Props: ', props)
     const fetcher = (url) =>
         fetch(url).then((res) => {
       return res.json();
@@ -38,7 +37,7 @@ const Layout = (props) => {
                 }
                 return include
             })
-            console.log('Setting Filtered Data', data)
+            // console.log('Setting Filtered Data', data)
             props.setFilteredData(data)
         })
     }

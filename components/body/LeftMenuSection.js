@@ -2,7 +2,6 @@ import Modal from './Modal'
 import { useEffect, useState } from 'react'
 
 const LeftMenuSection = (props) => {
-    console.log('Left Menu Section Props: ', props.section)
     const [modalVisibility, setModalVisibility] = useState(false)
     return (
         <div>
